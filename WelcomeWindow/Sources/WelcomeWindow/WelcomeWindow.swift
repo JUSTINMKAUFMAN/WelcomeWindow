@@ -68,6 +68,7 @@ public struct WelcomeWindow: View {
                                 Text(action.detail).font(.subheadline)
                             }
                         }
+                        .onTapGesture { action.onSelect() }
                     }
                 }
             }
