@@ -10,6 +10,10 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "WelcomeWindow", dependencies: [])
+        .target(
+            name: "WelcomeWindow",
+            dependencies: [],
+            path: "WelcomeWindow"
+        )
     ]
 )
