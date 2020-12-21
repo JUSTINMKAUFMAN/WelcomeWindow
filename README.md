@@ -12,10 +12,6 @@ Compatible with applications targeting macOS 11+ and iOS 14+.
     <img src="/WelcomeDemo.png" />
 </p>
 
-<p align="center">
-    <img src="/WelcomeWindow.png" />
-</p>
-
 ## Installation
 
 ### Swift Package Manager
