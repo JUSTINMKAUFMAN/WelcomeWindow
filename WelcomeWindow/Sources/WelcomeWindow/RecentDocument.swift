@@ -14,7 +14,11 @@ public struct RecentDocument: Identifiable, Hashable {
     public let detail: String
     public let systemImage: String
     
-    public init(name: String, detail: String, systemImage: String = "doc.fill") {
+    public init(
+        name: String,
+        detail: String,
+        systemImage: String = "doc.fill"
+    ) {
         self.name = name
         self.detail = detail
         self.systemImage = systemImage

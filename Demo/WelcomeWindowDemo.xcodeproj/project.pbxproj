@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		068BE52425914EF10074BEAD /* WelcomeWindow in Frameworks */ = {isa = PBXBuildFile; productRef = 068BE52325914EF10074BEAD /* WelcomeWindow */; };
 		06FF8EA025914819008316CA /* WelcomeWindowDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF8E9F25914819008316CA /* WelcomeWindowDemoApp.swift */; };
 		06FF8EA225914819008316CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF8EA125914819008316CA /* ContentView.swift */; };
 		06FF8EA42591481C008316CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06FF8EA32591481C008316CA /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				068BE52425914EF10074BEAD /* WelcomeWindow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,9 @@
 			dependencies = (
 			);
 			name = WelcomeWindowDemo;
+			packageProductDependencies = (
+				068BE52325914EF10074BEAD /* WelcomeWindow */,
+			);
 			productName = WelcomeWindowDemo;
 			productReference = 06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 06FF8E9325914819008316CA;
+			packageReferences = (
+				068BE52225914EF10074BEAD /* XCRemoteSwiftPackageReference "WelcomeWindow" */,
+			);
 			productRefGroup = 06FF8E9D25914819008316CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -329,6 +337,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		068BE52225914EF10074BEAD /* XCRemoteSwiftPackageReference "WelcomeWindow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JUSTINMKAUFMAN/WelcomeWindow";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		068BE52325914EF10074BEAD /* WelcomeWindow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 068BE52225914EF10074BEAD /* XCRemoteSwiftPackageReference "WelcomeWindow" */;
+			productName = WelcomeWindow;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 06FF8E9425914819008316CA /* Project object */;
 }

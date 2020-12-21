@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "WelcomeWindow",
+        "repositoryURL": "https://github.com/JUSTINMKAUFMAN/WelcomeWindow",
+        "state": {
+          "branch": null,
+          "revision": "bebde9e6876e5a38adb1a25e4d80ad0567c944d8",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

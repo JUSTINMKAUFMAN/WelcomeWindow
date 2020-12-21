@@ -16,6 +16,20 @@ public struct WelcomeWindow: View {
     public let recentDocuments: [RecentDocument]
     public let handleOpenDocument: (RecentDocument) -> ()
     
+    public init(
+        logoImage: Image,
+        titleText: String,
+        actions: [WelcomeAction],
+        recentDocuments: [RecentDocument],
+        handleOpenDocument: (RecentDocument) -> ()
+    ) {
+        self.logoImage = logoImage
+        self.titleText = titleText
+        self.actions = actions
+        self.recentDocuments = recentDocuments
+        self.handleOpenDocument = handleOpenDocument
+    }
+    
     public var body: some View {
         HStack(alignment: .top, spacing: 0.0) {
             VStack(alignment: .center, spacing: 0.0) {

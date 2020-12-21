@@ -14,4 +14,16 @@ public struct WelcomeAction: Identifiable {
     public let detail: String
     public let systemImage: String
     public let onSelect: () -> ()
+    
+    public init(
+        title: String,
+        detail: String,
+        systemImage: String,
+        onSelect: () -> ()
+    ) {
+        self.title = title
+        self.detail = detail
+        self.systemImage = systemImage
+        self.onSelect = onSelect
+    }
 }
