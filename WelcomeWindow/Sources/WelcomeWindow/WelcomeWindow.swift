@@ -34,6 +34,8 @@ public struct WelcomeWindow: View {
         HStack(alignment: .top, spacing: 0.0) {
             VStack(alignment: .center, spacing: 0.0) {
                 logoImage
+                    .resizable()
+                    .frame(width: 100.0, height: 100.0)
                 
                 Spacer().frame(height: 3.0)
                 
