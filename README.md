@@ -4,7 +4,9 @@
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
-A welcome screen for a macOS application modeled after the Welcome to Xcode window.
+A welcome screen for a SwiftUI application modeled after the Welcome to Xcode window.
+
+Compatible with applications targeting macOS 11+ and iOS 14+.
 
 <p align="center">
 <img src="/WelcomeWindow.png" />
@@ -14,7 +16,7 @@ A welcome screen for a macOS application modeled after the Welcome to Xcode wind
 
 ### Swift Package Manager
 
-WelcomeWindow is available as a Swift Package. To use it in your project, add it to your project's Swift Packages:
+`WelcomeWindow` is available as a Swift Package. To use it in your project, add it to your project's Swift Packages:
 
 ```swift
 https://github.com/JUSTINMKAUFMAN/WelcomeWindow.git
@@ -22,26 +24,51 @@ https://github.com/JUSTINMKAUFMAN/WelcomeWindow.git
 
 ## Usage
 
-The top drawer can be added to any `UIViewController` simply by initializing an instance of `TopDrawer` and adding it as a subview. For example:
+Refer to the `Demo` application (included in this repository) for sample usage. 
+
+Alternatively, `WelcomeWindow` can be used as follows:
 
 ```swift
-class ViewController: UIViewController {
-let topDrawer = TopDrawer()
+import SwiftUI
+import WelcomeWindow
 
-init() {
-super.init(nibName: nil, bundle: nil)
-view.addSubview(topDrawer)
-}
-
-required init?(coder aDecoder: NSCoder) {
-fatalError("init(coder:) has not been implemented")
-}
+@main
+struct MyApp: App {
+    @SceneBuilder var body: some Scene {
+        WindowGroup {
+            WelcomeWindow(
+                logoImage: Image(systemName: "qrcode.viewfinder"),
+                titleText: "Welcome to MyApp",
+                actions: [
+                    WelcomeAction(
+                        title: "Create a new project", 
+                        detail: "Create a new project",
+                        systemImage: "plus.square",
+                        onSelect: { /* Handle action */ }
+                    ),
+                    WelcomeAction(
+                        title: "Create a new project", 
+                        detail: "Create a new project",
+                        systemImage: "plus.square",
+                        onSelect: { /* Handle action */ }
+                    ),
+                    WelcomeAction(
+                        title: "Create a new project", 
+                        detail: "Create a new project",
+                        systemImage: "plus.square",
+                        onSelect: { /* Handle action */ }
+                    )
+                ],
+                recentDocuments: [
+                    RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
+                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB")
+                ],
+                handleOpenDocument: { doc in /* Handle open document */ }
+            )
+        }
+    }
 }
 ```
-
-Note that you should _not_ add your own auto-layout constraints to `TopDrawer` (layout is handled internally by adjusting the frame position/visibility).
-
-See the sample project for a basic implementation. 
 
 ## Author
 
@@ -49,4 +76,4 @@ Justin Kaufman, jmkauf@gmail.com
 
 ## License
 
-TopDrawer is available under the MIT license. See the LICENSE file for more info.
+WelcomeWindow is available under the MIT license. See the LICENSE file for more info.
