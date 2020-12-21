@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "WelcomeWindow",
-        "repositoryURL": "https://github.com/JUSTINMKAUFMAN/WelcomeWindow",
+        "repositoryURL": "https://github.com/JUSTINMKAUFMAN/WelcomeWindow.git",
         "state": {
           "branch": null,
-          "revision": "bebde9e6876e5a38adb1a25e4d80ad0567c944d8",
+          "revision": "6661cb0d9de472ba4159a8da76bccc04ea5afded",
           "version": "1.0.0"
         }
       }

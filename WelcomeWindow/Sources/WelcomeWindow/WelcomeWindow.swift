@@ -21,7 +21,7 @@ public struct WelcomeWindow: View {
         titleText: String,
         actions: [WelcomeAction],
         recentDocuments: [RecentDocument],
-        handleOpenDocument: (RecentDocument) -> ()
+        handleOpenDocument: (@escaping (RecentDocument) -> ())
     ) {
         self.logoImage = logoImage
         self.titleText = titleText

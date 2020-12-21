@@ -19,7 +19,7 @@ public struct WelcomeAction: Identifiable {
         title: String,
         detail: String,
         systemImage: String,
-        onSelect: () -> ()
+        onSelect: (@escaping () -> ())
     ) {
         self.title = title
         self.detail = detail
