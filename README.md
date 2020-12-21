@@ -9,7 +9,11 @@ A welcome screen for a SwiftUI application modeled after the Welcome to Xcode wi
 Compatible with applications targeting macOS 11+ and iOS 14+.
 
 <p align="center">
-<img src="/WelcomeWindow.png" />
+    <img src="/WelcomeDemo.png" />
+</p>
+
+<p align="center">
+    <img src="/WelcomeWindow.png" />
 </p>
 
 ## Installation
