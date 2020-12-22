@@ -19,8 +19,10 @@ public struct DocumentList: View {
             ForEach(documents) { document in
                 DocumentListRow(document: document)
                     .tag(document)
-                    .onTapGesture(count: 2, perform: { didOpen(document) })
-                    .onTapGesture(count: 1, perform: { selectedDocument = document })
+                    .onTapGesture {
+                        selectedDocument = document
+                        didOpen(document)
+                    }
             }
         }
         .listStyle(SidebarListStyle())

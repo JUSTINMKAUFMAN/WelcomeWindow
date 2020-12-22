@@ -34,9 +34,5 @@ struct DocumentListRow: View {
         .padding(.vertical, 2.0)
         .padding(.leading, 16.0)
         .padding(.trailing, 6.0)
-        .background(
-            Rectangle()
-                .foregroundColor(Color.white.opacity(.leastNonzeroMagnitude))
-        )
     }
 }
