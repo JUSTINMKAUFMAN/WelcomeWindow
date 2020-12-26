@@ -9,8 +9,7 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 public struct DocumentList: View {
-    @State public var selectedDocument: RecentDocument?
-    
+    @Binding public var selectedDocument: RecentDocument?
     public let documents: [RecentDocument]
     public let didOpen: (RecentDocument) -> ()
     
@@ -19,12 +18,11 @@ public struct DocumentList: View {
             ForEach(documents) { document in
                 DocumentListRow(document: document)
                     .tag(document)
-                    .onTapGesture {
-                        selectedDocument = document
-                        didOpen(document)
-                    }
             }
         }
         .listStyle(SidebarListStyle())
+        .onChange(of: selectedDocument) { document in
+            if let document = document { didOpen(document) }
+        }
     }
 }

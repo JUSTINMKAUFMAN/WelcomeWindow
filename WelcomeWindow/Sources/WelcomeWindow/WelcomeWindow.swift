@@ -9,7 +9,8 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 public struct WelcomeWindow: View {
-    @State var selectedDocumentIndex: Int? = nil
+    @State private var selectedDocument: RecentDocument? = nil
+    
     public let logoImage: Image
     public let titleText: String
     public let actions: [WelcomeAction]
@@ -76,6 +77,7 @@ public struct WelcomeWindow: View {
             .padding(40.0)
             
             DocumentList(
+                selectedDocument: $selectedDocument,
                 documents: recentDocuments,
                 didOpen: { document in handleOpenDocument(document) }
             )

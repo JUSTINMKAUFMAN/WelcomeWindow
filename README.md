@@ -1,6 +1,6 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.0.3-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.0.4-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
@@ -63,7 +63,7 @@ struct MyApp: App {
                     RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
                     RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB")
                 ],
-                handleOpenDocument: { doc in /* Handle open document */ }
+                handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }
     }

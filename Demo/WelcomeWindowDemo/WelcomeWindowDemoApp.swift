@@ -39,7 +39,9 @@ struct WelcomeWindowDemoApp: App {
                     RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
                     RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB")
                 ],
-                handleOpenDocument: { doc in /* Handle open document */ }
+                handleOpenDocument: { doc in
+                    print("Document opened: \(doc.name)")
+                }
             )
         }
     }
