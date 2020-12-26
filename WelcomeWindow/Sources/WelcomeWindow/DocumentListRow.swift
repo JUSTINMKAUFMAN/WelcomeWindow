@@ -17,6 +17,7 @@ struct DocumentListRow: View {
                 .resizable()
                 .foregroundColor(Color.accentColor)
                 .frame(width: 21.0, height: 27.0)
+                .disabled(true)
             
             Spacer().frame(width: 13.0)
             
@@ -30,9 +31,8 @@ struct DocumentListRow: View {
                     .font(.system(size: 10.0))
                     .truncationMode(.middle)
             }
+            .disabled(true)
         }
-        .padding(.vertical, 2.0)
-        .padding(.leading, 16.0)
-        .padding(.trailing, 6.0)
+        .padding(EdgeInsets(top: 2.0, leading: 16.0, bottom: 2.0, trailing: 6.0))
     }
 }

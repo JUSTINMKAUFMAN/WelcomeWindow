@@ -20,28 +20,26 @@ struct WelcomeWindowDemoApp: App {
                         title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Triggered Action 1") }
                     ),
                     WelcomeAction(
                         title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Triggered Action 2") }
                     ),
                     WelcomeAction(
                         title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Triggered Action 3") }
                     )
                 ],
                 recentDocuments: [
                     RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
                     RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB")
                 ],
-                handleOpenDocument: { doc in
-                    print("Document opened: \(doc.name)")
-                }
+                handleOpenDocument: { doc in print("Opened Document: \(doc.name)") }
             )
         }
     }
