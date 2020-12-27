@@ -102,7 +102,7 @@ public struct WelcomeWindow: View {
                 window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
             }
         })
-        .background(colorScheme == .light ? Color(NSColor.white) : Color(NSColor.windowBackgroundColor))
+        .background(colorScheme == .light ? Color(NSColor.white) : Color.clear)
     }
     
     private func getCurrentAppVersion() -> String {
