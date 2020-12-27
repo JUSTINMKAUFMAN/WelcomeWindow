@@ -93,16 +93,16 @@ public struct WelcomeWindow: View {
                 window.titlebarAppearsTransparent = true
                 window.titlebarSeparatorStyle = .none
                 window.titleVisibility = .hidden
-                window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
                 
                 window.toolbar = nil
                 window.styleMask.remove(.closable)
                 window.styleMask.remove(.miniaturizable)
                 window.styleMask.remove(.resizable)
                 window.setContentSize(CGSize(width: 801.0, height: 460.0))
+                window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
             }
         })
-        .background(colorScheme == .light ? Color.white : Color(NSColor.windowBackgroundColor))
+        .background(colorScheme == .light ? Color(NSColor.white) : Color(NSColor.windowBackgroundColor))
     }
     
     private func getCurrentAppVersion() -> String {
