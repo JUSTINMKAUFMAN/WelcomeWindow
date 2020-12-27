@@ -9,6 +9,7 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 public struct WelcomeWindow: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var selectedDocument: RecentDocument? = nil
     
     public let logoImage: Image
@@ -42,9 +43,7 @@ public struct WelcomeWindow: View {
                 
                 Text(titleText)
                     .font(.system(size: 36.0))
-                    .fontWeight(.regular)
-                    .foregroundColor(.black)
-                
+                    
                 Spacer().frame(height: 7.0)
                 
                 Text("Version \(getCurrentAppVersion())")
@@ -103,7 +102,7 @@ public struct WelcomeWindow: View {
                 window.setContentSize(CGSize(width: 801.0, height: 460.0))
             }
         })
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color(NSColor.darkGray) : Color.white)
     }
     
     private func getCurrentAppVersion() -> String {
