@@ -1,16 +1,20 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.1.5-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.1.6-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
 A welcome screen for a SwiftUI application modeled after the Welcome to Xcode window.
 
-Compatible with applications targeting macOS 11+ and iOS 14+.
-
 <p align="center">
-    <img src="/WelcomeDemo.png" />
+    <img src="/WelcomeWindowDemoMac.png" />
+    <br>
+    <img src="/WelcomeWindowDemoiOS.png" />
 </p>
+
+## Compatibility
+
+WelcomeWindow is compatible with applications targeting **macOS 11+** and **iOS 14+**.
 
 ## Installation
 
