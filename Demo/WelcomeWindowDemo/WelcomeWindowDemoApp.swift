@@ -9,8 +9,8 @@ import SwiftUI
 import WelcomeWindow
 
 @main
-struct WelcomeWindowDemoApp: App {
-    var body: some Scene {
+struct MyApp: App {
+    @SceneBuilder var body: some Scene {
         WindowGroup {
             WelcomeWindow(
                 logoImage: Image(systemName: "qrcode.viewfinder"),
@@ -20,28 +20,30 @@ struct WelcomeWindowDemoApp: App {
                         title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { print("Triggered Action 1") }
+                        imageColor: Color.red,
+                        isEnabled: false,
+                        onSelect: { /* Handle action */ }
                     ),
                     WelcomeAction(
-                        title: "Create another new project",
-                        detail: "Create another new project",
+                        title: "Create a new project",
+                        detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { print("Triggered Action 2") }
+                        imageColor: Color.green,
+                        onSelect: { /* Handle action */ }
                     ),
                     WelcomeAction(
-                        title: "Create yet another new project",
-                        detail: "Create yet another new project",
+                        title: "Create a new project",
+                        detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { print("Triggered Action 3") }
+                        onSelect: { /* Handle action */ }
                     )
                 ],
                 recentDocuments: [
-                    RecentDocument(name: "MyDocA", detail: "~/path/to/MyDocA"),
-                    RecentDocument(name: "MyDocB", detail: "~/path/to/MyDocB")
+                    RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
+                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB"),
+                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB", systemImage: "plus.square")
                 ],
-                handleOpenDocument: { doc in
-                    print("Opened Document: \(doc.name)")
-                }
+                handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }
     }

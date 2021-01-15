@@ -44,12 +44,15 @@ struct MyApp: App {
                         title: "Create a new project", 
                         detail: "Create a new project",
                         systemImage: "plus.square",
+                        imageColor: Color.red,
+                        isEnabled: false,
                         onSelect: { /* Handle action */ }
                     ),
                     WelcomeAction(
                         title: "Create a new project", 
                         detail: "Create a new project",
                         systemImage: "plus.square",
+                        imageColor: Color.green,
                         onSelect: { /* Handle action */ }
                     ),
                     WelcomeAction(
@@ -61,7 +64,8 @@ struct MyApp: App {
                 ],
                 recentDocuments: [
                     RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
-                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB")
+                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB"),
+                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB", systemImage: "plus.square")
                 ],
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )

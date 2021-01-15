@@ -13,14 +13,17 @@ public struct RecentDocument: Identifiable, Hashable {
     public let name: String
     public let detail: String
     public let systemImage: String
+    public let imageColor: Color
     
     public init(
         name: String,
         detail: String,
-        systemImage: String = "doc.fill"
+        systemImage: String = "doc.fill",
+        imageColor: Color = Color.accentColor
     ) {
         self.name = name
         self.detail = detail
         self.systemImage = systemImage
+        self.imageColor = imageColor
     }
 }

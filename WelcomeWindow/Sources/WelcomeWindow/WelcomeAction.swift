@@ -13,17 +13,23 @@ public struct WelcomeAction: Identifiable {
     public let title: String
     public let detail: String
     public let systemImage: String
+    public let imageColor: Color
+    public let isEnabled: Bool
     public let onSelect: () -> ()
     
     public init(
         title: String,
         detail: String,
         systemImage: String,
+        imageColor: Color = Color.blue,
+        isEnabled: Bool = true,
         onSelect: (@escaping () -> ())
     ) {
         self.title = title
         self.detail = detail
         self.systemImage = systemImage
+        self.imageColor = imageColor
+        self.isEnabled = isEnabled
         self.onSelect = onSelect
     }
 }

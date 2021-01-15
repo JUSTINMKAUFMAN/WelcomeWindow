@@ -58,7 +58,7 @@ public struct WelcomeWindow: View {
                         HStack {
                             Image(systemName: action.systemImage)
                                 .resizable()
-                                .foregroundColor(.blue)
+                                .foregroundColor(action.imageColor)
                                 .frame(width: 30.0, height: 30.0)
                             
                             Spacer().frame(width: 12.0)
@@ -68,7 +68,8 @@ public struct WelcomeWindow: View {
                                 Text(action.detail).font(.subheadline)
                             }
                         }
-                        .onTapGesture { action.onSelect() }
+                        .onTapGesture { if action.isEnabled { action.onSelect() } }
+                        .opacity(action.isEnabled ? 1.0 : 0.5)
                     }
                 }
             }
@@ -84,26 +85,7 @@ public struct WelcomeWindow: View {
         .padding(.top, -19.0)
         .frame(height: 450.0)
         .presentedWindowStyle(HiddenTitleBarWindowStyle())
-        .onView(added: { view in
-            #if os(macOS)
-                /// Add window appearance customizations not available in SwiftUI
-                DispatchQueue.main.async {
-                    guard let window = view.window else { return }
-                    
-                    window.isMovableByWindowBackground = true
-                    window.titlebarAppearsTransparent = true
-                    window.titlebarSeparatorStyle = .none
-                    window.titleVisibility = .hidden
-                    
-                    window.toolbar = nil
-                    window.styleMask.remove(.closable)
-                    window.styleMask.remove(.miniaturizable)
-                    window.styleMask.remove(.resizable)
-                    window.setContentSize(CGSize(width: 801.0, height: 460.0))
-                    window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
-                }
-            #endif
-        })
+        .onView(added: { view in customizeAppearance(view) })
         .background(colorScheme == .light ? Color(NSUIColor.white) : Color.clear)
     }
     
@@ -111,5 +93,28 @@ public struct WelcomeWindow: View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
         let version = (appVersion as! String)
         return version
+    }
+    
+    private func customizeAppearance(_ view: NSUIView?) {
+        guard let view = view else { return }
+        
+        #if os(macOS)
+            /// Add window appearance customizations not available in SwiftUI
+            DispatchQueue.main.async {
+                guard let window = view.window else { return }
+                
+                window.isMovableByWindowBackground = true
+                window.titlebarAppearsTransparent = true
+                window.titlebarSeparatorStyle = .none
+                window.titleVisibility = .hidden
+                
+                window.toolbar = nil
+                window.styleMask.remove(.closable)
+                window.styleMask.remove(.miniaturizable)
+                window.styleMask.remove(.resizable)
+                window.setContentSize(CGSize(width: 801.0, height: 460.0))
+                window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
+            }
+        #endif
     }
 }

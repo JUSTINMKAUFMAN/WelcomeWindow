@@ -15,7 +15,7 @@ struct DocumentListRow: View {
         HStack(alignment: .center) {
             Image(systemName: document.systemImage)
                 .resizable()
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(document.imageColor)
                 .frame(width: 21.0, height: 27.0)
                 .disabled(true)
             

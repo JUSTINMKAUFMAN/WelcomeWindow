@@ -26,7 +26,7 @@
 		06074E6925B1F70900D81748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06074E6C25B1F70900D81748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		06074E6E25B1F70900D81748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeWindowDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06FF8E9C25914819008316CA /* WelcomeWindowDemoMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeWindowDemoMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06FF8E9F25914819008316CA /* WelcomeWindowDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWindowDemoApp.swift; sourceTree = "<group>"; };
 		06FF8EA32591481C008316CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06FF8EA62591481C008316CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		06FF8E9D25914819008316CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */,
+				06FF8E9C25914819008316CA /* WelcomeWindowDemoMac.app */,
 				06074E6325B1F70700D81748 /* WelcomeWindowDemoiOS.app */,
 			);
 			name = Products;
@@ -143,9 +143,9 @@
 			productReference = 06074E6325B1F70700D81748 /* WelcomeWindowDemoiOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		06FF8E9B25914819008316CA /* WelcomeWindowDemo */ = {
+		06FF8E9B25914819008316CA /* WelcomeWindowDemoMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 06FF8EAC2591481C008316CA /* Build configuration list for PBXNativeTarget "WelcomeWindowDemo" */;
+			buildConfigurationList = 06FF8EAC2591481C008316CA /* Build configuration list for PBXNativeTarget "WelcomeWindowDemoMac" */;
 			buildPhases = (
 				06FF8E9825914819008316CA /* Sources */,
 				06FF8E9925914819008316CA /* Frameworks */,
@@ -155,12 +155,12 @@
 			);
 			dependencies = (
 			);
-			name = WelcomeWindowDemo;
+			name = WelcomeWindowDemoMac;
 			packageProductDependencies = (
 				068BE52C259150C20074BEAD /* WelcomeWindow */,
 			);
 			productName = WelcomeWindowDemo;
-			productReference = 06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */;
+			productReference = 06FF8E9C25914819008316CA /* WelcomeWindowDemoMac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +196,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				06FF8E9B25914819008316CA /* WelcomeWindowDemo */,
+				06FF8E9B25914819008316CA /* WelcomeWindowDemoMac */,
 				06074E6225B1F70700D81748 /* WelcomeWindowDemoiOS */,
 			);
 		};
@@ -341,6 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -396,6 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -420,8 +422,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemo;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemoMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -442,8 +444,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemo;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemoMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -470,7 +472,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		06FF8EAC2591481C008316CA /* Build configuration list for PBXNativeTarget "WelcomeWindowDemo" */ = {
+		06FF8EAC2591481C008316CA /* Build configuration list for PBXNativeTarget "WelcomeWindowDemoMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06FF8EAD2591481C008316CA /* Debug */,
