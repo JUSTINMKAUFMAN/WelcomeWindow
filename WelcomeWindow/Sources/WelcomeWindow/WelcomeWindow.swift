@@ -85,24 +85,26 @@ public struct WelcomeWindow: View {
         .frame(height: 450.0)
         .presentedWindowStyle(HiddenTitleBarWindowStyle())
         .onView(added: { view in
-            /// Add window appearance customizations not available in SwiftUI
-            DispatchQueue.main.async {
-                guard let window = view.window else { return }
-                
-                window.isMovableByWindowBackground = true
-                window.titlebarAppearsTransparent = true
-                window.titlebarSeparatorStyle = .none
-                window.titleVisibility = .hidden
-                
-                window.toolbar = nil
-                window.styleMask.remove(.closable)
-                window.styleMask.remove(.miniaturizable)
-                window.styleMask.remove(.resizable)
-                window.setContentSize(CGSize(width: 801.0, height: 460.0))
-                window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
-            }
+            #if os(macOS)
+                /// Add window appearance customizations not available in SwiftUI
+                DispatchQueue.main.async {
+                    guard let window = view.window else { return }
+                    
+                    window.isMovableByWindowBackground = true
+                    window.titlebarAppearsTransparent = true
+                    window.titlebarSeparatorStyle = .none
+                    window.titleVisibility = .hidden
+                    
+                    window.toolbar = nil
+                    window.styleMask.remove(.closable)
+                    window.styleMask.remove(.miniaturizable)
+                    window.styleMask.remove(.resizable)
+                    window.setContentSize(CGSize(width: 801.0, height: 460.0))
+                    window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
+                }
+            #endif
         })
-        .background(colorScheme == .light ? Color(NSColor.white) : Color.clear)
+        .background(colorScheme == .light ? Color(NSUIColor.white) : Color.clear)
     }
     
     private func getCurrentAppVersion() -> String {

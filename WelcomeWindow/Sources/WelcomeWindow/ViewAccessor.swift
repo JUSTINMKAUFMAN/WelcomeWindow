@@ -10,47 +10,40 @@ import SwiftUI
 @available(iOS 14.0, macOS 11.0, *)
 extension View {
     func onView(added: @escaping (NSUIView) -> Void) -> some View {
-        ViewAccessor(onViewAdded: added) { self }
+        #if os(macOS)
+            return ViewAccessor(onViewAdded: added) { self }
+        #else
+            return self
+        #endif
     }
 }
 
-@available(iOS 14.0, macOS 11.0, *)
-struct ViewAccessor<Content>: NSUIViewRepresentable where Content: View {
-    var onView: (NSUIView) -> Void
+@available(macOS 11.0, *)
+struct ViewAccessor<Content>: NSViewRepresentable where Content: View {
+    var onView: (NSView) -> Void
     var viewBuilder: () -> Content
-    typealias NSUIViewType = ViewAccessorHosting<Content>
-    
-    init(onViewAdded: @escaping (NSUIView) -> Void, @ViewBuilder viewBuilder: @escaping () -> Content) {
+
+    typealias NSViewType = ViewAccessorHosting<Content>
+
+    init(onViewAdded: @escaping (NSView) -> Void, @ViewBuilder viewBuilder: @escaping () -> Content) {
         self.onView = onViewAdded
         self.viewBuilder = viewBuilder
     }
+
+    func makeNSView(context: Context) -> NSViewType {
+        return ViewAccessorHosting(onView: onView, rootView: self.viewBuilder())
+    }
     
-    #if os(macOS)
-        func makeNSView(context: Context) -> ViewAccessorHosting<Content> {
-            return ViewAccessorHosting(onView: onView, rootView: self.viewBuilder())
-        }
-        
-        func updateNSView(_ nsView: ViewAccessorHosting<Content>, context: Context) {
-            nsView.rootView = self.viewBuilder()
-        }
-    #elseif os(iOS)
-        func makeUIView(context: Context) -> ViewAccessorHosting<Content> {
-            return ViewAccessorHosting(onView: onView, rootView: self.viewBuilder())
-        }
-        
-        func updateUIView(_ uiView: ViewAccessorHosting<Content>, context: Context) {
-            uiView.rootView = self.viewBuilder()
-        }
-    #else
-        #error("Unsupported platform")
-    #endif
+    func updateNSView(_ nsView: NSViewType, context: Context) {
+        nsView.rootView = self.viewBuilder()
+    }
 }
 
-@available(iOS 14.0, macOS 11.0, *)
-class ViewAccessorHosting<Content>: NSUIHostingView<Content> where Content: View {
-    var onView: ((NSUIView) -> Void)
+@available(macOS 11.0, *)
+class ViewAccessorHosting<Content>: NSHostingView<Content> where Content: View {
+    var onView: ((NSView) -> Void)
     
-    init(onView: @escaping (NSUIView) -> Void, rootView: Content) {
+    init(onView: @escaping (NSView) -> Void, rootView: Content) {
         self.onView = onView
         super.init(rootView: rootView)
     }
@@ -63,8 +56,9 @@ class ViewAccessorHosting<Content>: NSUIHostingView<Content> where Content: View
         fatalError("init(rootView:) has not been implemented")
     }
     
-    override func didAddSubview(_ subview: NSUIView) {
+    override func didAddSubview(_ subview: NSView) {
         super.didAddSubview(subview)
         onView(subview)
     }
 }
+#endif

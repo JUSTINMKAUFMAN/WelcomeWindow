@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06074E6625B1F70700D81748 /* WelcomeWindowDemoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06074E6525B1F70700D81748 /* WelcomeWindowDemoiOSApp.swift */; };
+		06074E6825B1F70700D81748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06074E6725B1F70700D81748 /* ContentView.swift */; };
+		06074E6A25B1F70900D81748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06074E6925B1F70900D81748 /* Assets.xcassets */; };
+		06074E6D25B1F70900D81748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06074E6C25B1F70900D81748 /* Preview Assets.xcassets */; };
+		06074E7425B1F72100D81748 /* WelcomeWindowDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF8E9F25914819008316CA /* WelcomeWindowDemoApp.swift */; };
+		06074E7925B1F77B00D81748 /* WelcomeWindow in Frameworks */ = {isa = PBXBuildFile; productRef = 06074E7825B1F77B00D81748 /* WelcomeWindow */; };
 		068BE52D259150C20074BEAD /* WelcomeWindow in Frameworks */ = {isa = PBXBuildFile; productRef = 068BE52C259150C20074BEAD /* WelcomeWindow */; };
 		06FF8EA025914819008316CA /* WelcomeWindowDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF8E9F25914819008316CA /* WelcomeWindowDemoApp.swift */; };
 		06FF8EA42591481C008316CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06FF8EA32591481C008316CA /* Assets.xcassets */; };
@@ -14,6 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06074E6325B1F70700D81748 /* WelcomeWindowDemoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeWindowDemoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06074E6525B1F70700D81748 /* WelcomeWindowDemoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWindowDemoiOSApp.swift; sourceTree = "<group>"; };
+		06074E6725B1F70700D81748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		06074E6925B1F70900D81748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		06074E6C25B1F70900D81748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		06074E6E25B1F70900D81748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeWindowDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06FF8E9F25914819008316CA /* WelcomeWindowDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWindowDemoApp.swift; sourceTree = "<group>"; };
 		06FF8EA32591481C008316CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -23,6 +35,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		06074E6025B1F70700D81748 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06074E7925B1F77B00D81748 /* WelcomeWindow in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06FF8E9925914819008316CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,11 +54,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06074E6425B1F70700D81748 /* WelcomeWindowDemoiOS */ = {
+			isa = PBXGroup;
+			children = (
+				06074E6525B1F70700D81748 /* WelcomeWindowDemoiOSApp.swift */,
+				06074E6725B1F70700D81748 /* ContentView.swift */,
+				06074E6925B1F70900D81748 /* Assets.xcassets */,
+				06074E6E25B1F70900D81748 /* Info.plist */,
+				06074E6B25B1F70900D81748 /* Preview Content */,
+			);
+			path = WelcomeWindowDemoiOS;
+			sourceTree = "<group>";
+		};
+		06074E6B25B1F70900D81748 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				06074E6C25B1F70900D81748 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		06074E7725B1F77B00D81748 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		06FF8E9325914819008316CA = {
 			isa = PBXGroup;
 			children = (
 				06FF8E9E25914819008316CA /* WelcomeWindowDemo */,
+				06074E6425B1F70700D81748 /* WelcomeWindowDemoiOS */,
 				06FF8E9D25914819008316CA /* Products */,
+				06074E7725B1F77B00D81748 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				06FF8E9C25914819008316CA /* WelcomeWindowDemo.app */,
+				06074E6325B1F70700D81748 /* WelcomeWindowDemoiOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +123,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		06074E6225B1F70700D81748 /* WelcomeWindowDemoiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06074E7125B1F70900D81748 /* Build configuration list for PBXNativeTarget "WelcomeWindowDemoiOS" */;
+			buildPhases = (
+				06074E5F25B1F70700D81748 /* Sources */,
+				06074E6025B1F70700D81748 /* Frameworks */,
+				06074E6125B1F70700D81748 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WelcomeWindowDemoiOS;
+			packageProductDependencies = (
+				06074E7825B1F77B00D81748 /* WelcomeWindow */,
+			);
+			productName = WelcomeWindowDemoiOS;
+			productReference = 06074E6325B1F70700D81748 /* WelcomeWindowDemoiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		06FF8E9B25914819008316CA /* WelcomeWindowDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06FF8EAC2591481C008316CA /* Build configuration list for PBXNativeTarget "WelcomeWindowDemo" */;
@@ -102,6 +172,9 @@
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					06074E6225B1F70700D81748 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					06FF8E9B25914819008316CA = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -124,11 +197,21 @@
 			projectRoot = "";
 			targets = (
 				06FF8E9B25914819008316CA /* WelcomeWindowDemo */,
+				06074E6225B1F70700D81748 /* WelcomeWindowDemoiOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		06074E6125B1F70700D81748 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06074E6D25B1F70900D81748 /* Preview Assets.xcassets in Resources */,
+				06074E6A25B1F70900D81748 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06FF8E9A25914819008316CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +224,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		06074E5F25B1F70700D81748 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06074E6825B1F70700D81748 /* ContentView.swift in Sources */,
+				06074E6625B1F70700D81748 /* WelcomeWindowDemoiOSApp.swift in Sources */,
+				06074E7425B1F72100D81748 /* WelcomeWindowDemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06FF8E9825914819008316CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,6 +245,51 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		06074E6F25B1F70900D81748 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WelcomeWindowDemoiOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WelcomeWindowDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemoiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		06074E7025B1F70900D81748 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WelcomeWindowDemoiOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WelcomeWindowDemoiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmkauf.WelcomeWindowDemoiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		06FF8EAA2591481C008316CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -314,6 +452,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		06074E7125B1F70900D81748 /* Build configuration list for PBXNativeTarget "WelcomeWindowDemoiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06074E6F25B1F70900D81748 /* Debug */,
+				06074E7025B1F70900D81748 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		06FF8E9725914819008316CA /* Build configuration list for PBXProject "WelcomeWindowDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -340,12 +487,17 @@
 			repositoryURL = "https://github.com/JUSTINMKAUFMAN/WelcomeWindow.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
+				minimumVersion = 1.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		06074E7825B1F77B00D81748 /* WelcomeWindow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 068BE52B259150C10074BEAD /* XCRemoteSwiftPackageReference "WelcomeWindow" */;
+			productName = WelcomeWindow;
+		};
 		068BE52C259150C20074BEAD /* WelcomeWindow */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 068BE52B259150C10074BEAD /* XCRemoteSwiftPackageReference "WelcomeWindow" */;

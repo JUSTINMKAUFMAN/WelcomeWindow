@@ -13,7 +13,6 @@ import SwiftUI
     public typealias NSUIView = NSView
 
     @available(iOS 14.0, macOS 11.0, *)
-    public typealias NSUIHostingView = NSHostingView
     public typealias NSUIScrollView = NSScrollView
     public typealias NSUILabel = NSTextField
     public typealias NSUIFont = NSFont
@@ -39,7 +38,6 @@ import SwiftUI
     import UIKit
 
     public typealias NSUIView = UIView
-    public typealias NSUIHostingView = UIHostingView
     public typealias NSUIScrollView = UIScrollView
     public typealias NSUILabel = UILabel
     public typealias NSUIFont = UIFont
