@@ -84,8 +84,7 @@ public struct WelcomeWindow: View {
         }
         .padding(.top, -19.0)
         .frame(height: 450.0)
-        .presentedWindowStyle(HiddenTitleBarWindowStyle())
-        .onView(added: { view in customizeAppearance(view) })
+        .modifier(WelcomeWindowAppearance(colorScheme: colorScheme))
         .background(colorScheme == .light ? Color(NSUIColor.white) : Color.clear)
     }
     
@@ -94,27 +93,35 @@ public struct WelcomeWindow: View {
         let version = (appVersion as! String)
         return version
     }
+}
+
+struct WelcomeWindowAppearance: ViewModifier {
+    var colorScheme: ColorScheme
     
-    private func customizeAppearance(_ view: NSUIView?) {
-        guard let view = view else { return }
-        
+    func body(content: Content) -> some View {
         #if os(macOS)
-            /// Add window appearance customizations not available in SwiftUI
-            DispatchQueue.main.async {
-                guard let window = view.window else { return }
-                
-                window.isMovableByWindowBackground = true
-                window.titlebarAppearsTransparent = true
-                window.titlebarSeparatorStyle = .none
-                window.titleVisibility = .hidden
-                
-                window.toolbar = nil
-                window.styleMask.remove(.closable)
-                window.styleMask.remove(.miniaturizable)
-                window.styleMask.remove(.resizable)
-                window.setContentSize(CGSize(width: 801.0, height: 460.0))
-                window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
-            }
+            return content
+                .presentedWindowStyle(HiddenTitleBarWindowStyle())
+                .onView(added: { view in
+                    /// Add window appearance customizations not available in SwiftUI
+                    DispatchQueue.main.async {
+                        guard let window = view.window else { return }
+                        
+                        window.isMovableByWindowBackground = true
+                        window.titlebarAppearsTransparent = true
+                        window.titlebarSeparatorStyle = .none
+                        window.titleVisibility = .hidden
+                        
+                        window.toolbar = nil
+                        window.styleMask.remove(.closable)
+                        window.styleMask.remove(.miniaturizable)
+                        window.styleMask.remove(.resizable)
+                        window.setContentSize(CGSize(width: 801.0, height: 460.0))
+                        window.backgroundColor = colorScheme == .light ? .white : .windowBackgroundColor
+                    }
+                })
+        #else
+            return content
         #endif
     }
 }

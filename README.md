@@ -1,6 +1,6 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.1.4-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.1.5-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 

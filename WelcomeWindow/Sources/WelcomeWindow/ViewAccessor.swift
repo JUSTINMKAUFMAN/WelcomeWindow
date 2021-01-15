@@ -7,18 +7,14 @@
 
 import SwiftUI
 
-@available(iOS 14.0, macOS 11.0, *)
+#if os(macOS)
+@available(macOS 11.0, *)
 extension View {
-    func onView(added: @escaping (NSUIView?) -> Void) -> AnyView {
-        #if os(macOS)
-            return AnyView(ViewAccessor(onViewAdded: added) { self })
-        #else
-            return AnyView(self)
-        #endif
+    func onView(added: @escaping (NSView) -> Void) -> some View {
+        ViewAccessor(onViewAdded: added) { self }
     }
 }
 
-#if os(macOS)
 @available(macOS 11.0, *)
 struct ViewAccessor<Content>: NSViewRepresentable where Content: View {
     var onView: (NSView) -> Void
