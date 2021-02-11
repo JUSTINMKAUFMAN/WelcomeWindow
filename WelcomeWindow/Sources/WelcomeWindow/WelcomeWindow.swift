@@ -17,22 +17,22 @@ public struct WelcomeWindow: View {
     public let logoImage: Image
     public let titleText: String
     public let actions: [WelcomeAction]
-    public let recentDocuments: [RecentDocument]
+    @Binding private var recentDocuments: [RecentDocument]
     public let handleOpenDocument: (RecentDocument) -> ()
     @Binding private var documentListTitle: String
     
     public init(
-        logoImage: Image,
-        titleText: String,
-        actions: [WelcomeAction],
-        recentDocuments: [RecentDocument],
+        logoImage: Image = Image(systemName: "qrcode.viewfinder"),
+        titleText: String = "Welcome",
+        actions: [WelcomeAction] = [],
+        recentDocuments: Binding<[RecentDocument]> = .constant([]),
         handleOpenDocument: (@escaping (RecentDocument) -> ()),
         documentListTitle: Binding<String> = .constant("Documents")
     ) {
         self.logoImage = logoImage
         self.titleText = titleText
         self.actions = actions
-        self.recentDocuments = recentDocuments
+        self._recentDocuments = recentDocuments
         self.handleOpenDocument = handleOpenDocument
         self._documentListTitle = documentListTitle
     }
@@ -88,7 +88,7 @@ public struct WelcomeWindow: View {
             DocumentList(
                 listTitle: $documentListTitle,
                 selectedDocument: $selectedDocument,
-                documents: recentDocuments,
+                documents: $recentDocuments,
                 didOpen: { document in handleOpenDocument(document) }
             )
         }

@@ -1,6 +1,6 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.1.7-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.1.8-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
@@ -66,7 +66,7 @@ struct MyApp: App {
                         onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: [
+                recentDocuments: .constant([
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
@@ -122,7 +122,7 @@ struct MyApp: App {
                             )
                         }
                     )
-                ],
+                ]),
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }

@@ -11,17 +11,15 @@ import SwiftUI
 public struct DocumentList: View {
     @Binding public var listTitle: String
     @Binding public var selectedDocument: RecentDocument?
-    @State private var hoverDocument: RecentDocument? = nil
-    
-    public let documents: [RecentDocument]
+    @Binding public var documents: [RecentDocument]
     public let didOpen: (RecentDocument) -> ()
     
+    @State private var hoverDocument: RecentDocument? = nil
+   
     public var body: some View {
         List(selection: $selectedDocument) {
             Section(header: Text(listTitle)) {
-                ForEach(documents) { document in
-                    DocumentListRow(document: document).tag(document)
-                }
+                ForEach(documents) { DocumentListRow(document: $0) }
             }
         }
         .listStyle(SidebarListStyle())
@@ -30,4 +28,3 @@ public struct DocumentList: View {
         }
     }
 }
-
