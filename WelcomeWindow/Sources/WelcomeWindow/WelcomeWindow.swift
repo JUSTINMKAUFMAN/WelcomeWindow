@@ -60,32 +60,25 @@ public struct WelcomeWindow: View {
                 
                 VStack(alignment: .leading, spacing: 16.0) {
                     ForEach(actions) { action in
-                        HStack {
-                            Spacer()
-                        
-                            HStack(spacing: 8.0) {
-                                Image(systemName: action.systemImage)
-                                    .font(.system(size: 32.0))
-                                    .foregroundColor(action.imageColor)
+                        HStack(spacing: 8.0) {
+                            Image(systemName: action.systemImage)
+                                .font(.system(size: 32.0))
+                                .foregroundColor(action.imageColor)
+                                .opacity(action == hoverAction ? 0.6 : 1.0)
+                            
+                            VStack(alignment: .leading, spacing: 0.0) {
+                                Text(action.title)
+                                    .font(.headline)
                                     .opacity(action == hoverAction ? 0.6 : 1.0)
                                 
-                                VStack(alignment: .leading, spacing: 0.0) {
-                                    Text(action.title)
-                                        .font(.headline)
-                                        .opacity(action == hoverAction ? 0.6 : 1.0)
-                                    
-                                    Text(action.detail)
-                                        .font(.subheadline)
-                                        .opacity(action == hoverAction ? 0.6 : 1.0)
-                                }
+                                Text(action.detail)
+                                    .font(.subheadline)
+                                    .opacity(action == hoverAction ? 0.6 : 1.0)
                             }
-                            
-                            Spacer()
                         }
                         .onTapGesture { if action.isEnabled { action.onSelect() } }
                         .opacity(action.isEnabled ? 1.0 : 0.5)
                         .onHover { hoverAction = $0 ? action : nil }
-                        
                     }
                 }
             }
