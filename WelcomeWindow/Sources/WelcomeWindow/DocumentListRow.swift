@@ -10,6 +10,7 @@ import SwiftUI
 @available(iOS 14.0, macOS 11.0, *)
 struct DocumentListRow: View {
     let document: RecentDocument
+    @State private var isHovered: Bool = false
 
     var body: some View {
         HStack(alignment: .center) {
@@ -34,5 +35,8 @@ struct DocumentListRow: View {
             .disabled(true)
         }
         .padding(EdgeInsets(top: 2.0, leading: 16.0, bottom: 2.0, trailing: 6.0))
+        .opacity(isHovered ? 0.7 : 1.0)
+        .onHover { isHovered = $0 }
+        .contextMenu { document.contextMenu?() }
     }
 }

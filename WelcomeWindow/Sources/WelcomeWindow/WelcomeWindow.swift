@@ -10,26 +10,31 @@ import SwiftUI
 @available(iOS 14.0, macOS 11.0, *)
 public struct WelcomeWindow: View {
     @Environment(\.colorScheme) var colorScheme
+    
     @State private var selectedDocument: RecentDocument? = nil
+    @State private var hoverAction: WelcomeAction? = nil
     
     public let logoImage: Image
     public let titleText: String
     public let actions: [WelcomeAction]
     public let recentDocuments: [RecentDocument]
     public let handleOpenDocument: (RecentDocument) -> ()
+    @Binding private var documentListTitle: String
     
     public init(
         logoImage: Image,
         titleText: String,
         actions: [WelcomeAction],
         recentDocuments: [RecentDocument],
-        handleOpenDocument: (@escaping (RecentDocument) -> ())
+        handleOpenDocument: (@escaping (RecentDocument) -> ()),
+        documentListTitle: Binding<String> = .constant("Documents")
     ) {
         self.logoImage = logoImage
         self.titleText = titleText
         self.actions = actions
         self.recentDocuments = recentDocuments
         self.handleOpenDocument = handleOpenDocument
+        self._documentListTitle = documentListTitle
     }
     
     public var body: some View {
@@ -56,20 +61,31 @@ public struct WelcomeWindow: View {
                 VStack(alignment: .leading, spacing: 16.0) {
                     ForEach(actions) { action in
                         HStack {
-                            Image(systemName: action.systemImage)
-                                .resizable()
-                                .foregroundColor(action.imageColor)
-                                .frame(width: 30.0, height: 30.0)
-                            
-                            Spacer().frame(width: 12.0)
-                            
-                            VStack(alignment: .leading, spacing: 0.0) {
-                                Text(action.title).font(.headline)
-                                Text(action.detail).font(.subheadline)
+                            Spacer()
+                        
+                            HStack(spacing: 8.0) {
+                                Image(systemName: action.systemImage)
+                                    .font(.system(size: 32.0))
+                                    .foregroundColor(action.imageColor)
+                                    .opacity(action == hoverAction ? 0.6 : 1.0)
+                                
+                                VStack(alignment: .leading, spacing: 0.0) {
+                                    Text(action.title)
+                                        .font(.headline)
+                                        .opacity(action == hoverAction ? 0.6 : 1.0)
+                                    
+                                    Text(action.detail)
+                                        .font(.subheadline)
+                                        .opacity(action == hoverAction ? 0.6 : 1.0)
+                                }
                             }
+                            
+                            Spacer()
                         }
                         .onTapGesture { if action.isEnabled { action.onSelect() } }
                         .opacity(action.isEnabled ? 1.0 : 0.5)
+                        .onHover { hoverAction = $0 ? action : nil }
+                        
                     }
                 }
             }
@@ -77,6 +93,7 @@ public struct WelcomeWindow: View {
             .padding(40.0)
             
             DocumentList(
+                listTitle: $documentListTitle,
                 selectedDocument: $selectedDocument,
                 documents: recentDocuments,
                 didOpen: { document in handleOpenDocument(document) }
