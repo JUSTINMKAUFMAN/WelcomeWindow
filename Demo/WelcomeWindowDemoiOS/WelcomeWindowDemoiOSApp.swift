@@ -1,8 +1,8 @@
 //
-//  WelcomeWindowDemoiOSApp.swift
-//  WelcomeWindowDemoiOS
+//  WelcomeWindowDemoMacApp.swift
+//  WelcomeWindowDemo
 //
-//  Created by Justin Kaufman on 1/15/21.
+//  Created by Justin Kaufman on 12/21/20.
 //
 
 import SwiftUI
@@ -38,7 +38,7 @@ struct WelcomeWindowDemoApp: App {
                         onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: .constant([
+                recentDocuments: [
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
@@ -94,7 +94,7 @@ struct WelcomeWindowDemoApp: App {
                             )
                         }
                     )
-                ]),
+                ],
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }

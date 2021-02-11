@@ -11,13 +11,13 @@ import SwiftUI
 public struct WelcomeWindow: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @State private var selectedDocument: RecentDocument? = nil
+    @State private var selectedDocument: Int? = nil
     @State private var hoverAction: WelcomeAction? = nil
     
     public let logoImage: Image
     public let titleText: String
     public let actions: [WelcomeAction]
-    @Binding private var recentDocuments: [RecentDocument]
+    public let recentDocuments: [RecentDocument]
     public let handleOpenDocument: (RecentDocument) -> ()
     @Binding private var documentListTitle: String
     
@@ -25,14 +25,14 @@ public struct WelcomeWindow: View {
         logoImage: Image = Image(systemName: "qrcode.viewfinder"),
         titleText: String = "Welcome",
         actions: [WelcomeAction] = [],
-        recentDocuments: Binding<[RecentDocument]> = .constant([]),
+        recentDocuments: [RecentDocument] = [],
         handleOpenDocument: (@escaping (RecentDocument) -> ()),
         documentListTitle: Binding<String> = .constant("Documents")
     ) {
         self.logoImage = logoImage
         self.titleText = titleText
         self.actions = actions
-        self._recentDocuments = recentDocuments
+        self.recentDocuments = recentDocuments
         self.handleOpenDocument = handleOpenDocument
         self._documentListTitle = documentListTitle
     }
@@ -87,9 +87,12 @@ public struct WelcomeWindow: View {
             
             DocumentList(
                 listTitle: $documentListTitle,
-                selectedDocument: $selectedDocument,
-                documents: $recentDocuments,
-                didOpen: { document in handleOpenDocument(document) }
+                documents: recentDocuments,
+                selectedDocument: $selectedDocument.didSet { value in
+                    if let idx = value, idx < recentDocuments.count {
+                        handleOpenDocument(recentDocuments[idx])
+                    }
+                }
             )
         }
         .padding(.top, -19.0)
