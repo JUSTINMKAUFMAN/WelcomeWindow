@@ -33,7 +33,6 @@ public struct DocumentList: View {
                         document: document,
                         isSelected: (selectedDocument != nil) ? (documents[selectedDocument!] == document) : false
                     )
-                    .tag(documents.firstIndex(of: document)!)
                     .onTapGesture {
                         if let idx = documents.firstIndex(of: document), idx != selectedDocument {
                             selectedDocument = idx
