@@ -16,7 +16,14 @@ public struct DocumentList: View {
     
     public var body: some View {
         VStack {
-            Text(listTitle)
+            HStack {
+                Text(listTitle)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                
+                Spacer()
+            }
             
             List(
                 documents,

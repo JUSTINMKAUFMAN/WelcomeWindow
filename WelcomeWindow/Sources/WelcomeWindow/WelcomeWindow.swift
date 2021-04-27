@@ -134,3 +134,102 @@ struct WelcomeWindowAppearance: ViewModifier {
         #endif
     }
 }
+
+struct WelcomeWindow_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            WelcomeWindow(
+                actions: [
+                    WelcomeAction(
+                        title: "Create a new project",
+                        detail: "Create a new project",
+                        systemImage: "plus.square",
+                        onSelect: {}
+                    )
+                ],
+                recentDocuments: [
+                    RecentDocument(
+                        name: "MyDocA",
+                        detail: "/path/to/MyDocA",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        children: [
+                            RecentDocument(
+                                name: "ChildDocA",
+                                detail: "/path/to/ChildDocA"
+                            )
+                        ]
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        systemImage: "plus.square"
+                    )
+                ],
+                handleOpenDocument: { _ in }
+            )
+            WelcomeWindow(
+                actions: [
+                    WelcomeAction(
+                        title: "Create a new project",
+                        detail: "Create a new project",
+                        systemImage: "plus.square",
+                        onSelect: {}
+                    )
+                ],
+                recentDocuments: [
+                    RecentDocument(
+                        name: "MyDocA",
+                        detail: "/path/to/MyDocA",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        children: [
+                            RecentDocument(
+                                name: "ChildDocA",
+                                detail: "/path/to/ChildDocA"
+                            )
+                        ]
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        systemImage: "plus.square"
+                    )
+                ],
+                handleOpenDocument: { _ in }
+            )
+        }
+    }
+}
