@@ -12,38 +12,38 @@ public struct DocumentList: View {
     @Binding public var listTitle: String
     public let documents: [RecentDocument]
     let onOpen: (RecentDocument) -> ()
-    @State private var selectedDocument: Int? = nil
+    
+    @State private var selectedDocument: UUID? = nil
+    @State private var hoveredDocument: UUID? = nil
     
     public var body: some View {
-        VStack {
-            HStack {
-                Text(listTitle)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.gray)
+        List(
+            documents,
+            children: \.children,
+            rowContent: { document in
+                let isRoot = documents.contains(document)
                 
-                Spacer()
-            }
-            
-            List(
-                documents,
-                children: \.children,
-                rowContent: { document in
-                    DocumentListRow(
-                        document: document,
-                        isSelected: (selectedDocument != nil) ? (documents[selectedDocument!] == document) : false
-                    )
-                    .onTapGesture {
-                        if let idx = documents.firstIndex(of: document), idx != selectedDocument {
-                            selectedDocument = idx
-                            onOpen(document)
+                VStack {
+                    if documents[0] == document {
+                        HStack {
+                            Section(header: Text(listTitle)) {}
+                            Spacer()
                         }
                     }
+                    
+                    DocumentListRow(
+                        document: document,
+                        isRoot: isRoot,
+                        isSelected: isRoot ? (selectedDocument == document.id) : false,
+                        isHovered: hoveredDocument == document.id,
+                        onAction: { if isRoot { selectedDocument = $0.id; onOpen($0) } }
+                    )
+                    .onHover { _ in hoveredDocument = document.id }
                     .contextMenu { document.contextMenu?() }
                 }
-            )
-            .listStyle(SidebarListStyle())
-        }
+            }
+        )
+        .listStyle(SidebarListStyle())
     }
 }
 
