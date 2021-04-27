@@ -1,8 +1,8 @@
 //
-//  WelcomeWindowDemoiOSApp.swift
-//  WelcomeWindowDemoiOS
+//  WelcomeWindowDemoMacApp.swift
+//  WelcomeWindowDemo
 //
-//  Created by Justin Kaufman on 1/15/21.
+//  Created by Justin Kaufman on 12/21/20.
 //
 
 import SwiftUI
@@ -39,9 +39,61 @@ struct WelcomeWindowDemoApp: App {
                     )
                 ],
                 recentDocuments: [
-                    RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
-                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB"),
-                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB", systemImage: "plus.square")
+                    RecentDocument(
+                        name: "MyDocA",
+                        detail: "/path/to/MyDocA",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        systemImage: "plus.square",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    )
                 ],
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )

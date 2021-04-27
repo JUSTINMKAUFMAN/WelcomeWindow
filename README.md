@@ -1,6 +1,6 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.1.7-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.2.0-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
@@ -42,35 +42,87 @@ struct MyApp: App {
         WindowGroup {
             WelcomeWindow(
                 logoImage: Image(systemName: "qrcode.viewfinder"),
-                titleText: "Welcome to MyApp",
+                titleText: "Welcome to App",
                 actions: [
                     WelcomeAction(
-                        title: "Create a new project", 
+                        title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
                         imageColor: Color.red,
                         isEnabled: false,
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Action triggered") }
                     ),
                     WelcomeAction(
-                        title: "Create a new project", 
+                        title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
                         imageColor: Color.green,
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Action triggered") }
                     ),
                     WelcomeAction(
-                        title: "Create a new project", 
+                        title: "Create a new project",
                         detail: "Create a new project",
                         systemImage: "plus.square",
-                        onSelect: { /* Handle action */ }
+                        onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: [
-                    RecentDocument(name: "MyDocA", detail: "/path/to/MyDocA"),
-                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB"),
-                    RecentDocument(name: "MyDocB", detail: "/path/to/MyDocB", systemImage: "plus.square")
-                ],
+                recentDocuments: .constant([
+                    RecentDocument(
+                        name: "MyDocA",
+                        detail: "/path/to/MyDocA",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    ),
+                    RecentDocument(
+                        name: "MyDocB",
+                        detail: "/path/to/MyDocB",
+                        systemImage: "plus.square",
+                        contextMenu: {
+                            AnyView(
+                                VStack {
+                                    Button(
+                                        action: { print("Context Action A triggered") },
+                                        label: { Text("Context Action A") }
+                                    )
+                                    Button(
+                                        action: { print("Context Action B triggered") },
+                                        label: { Text("Context Action B") }
+                                    )
+                                }
+                            )
+                        }
+                    )
+                ]),
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }

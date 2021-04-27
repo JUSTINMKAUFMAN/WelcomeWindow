@@ -9,30 +9,35 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 public struct DocumentList: View {
-    @Binding public var selectedDocument: RecentDocument?
+    @Binding public var listTitle: String
     public let documents: [RecentDocument]
-    public let didOpen: (RecentDocument) -> ()
+    let onOpen: (RecentDocument) -> ()
+    @State private var selectedDocument: Int? = nil
     
     public var body: some View {
-        List(
-            documents,
-            children: \.children,
-            rowContent: { document in
-                DocumentListRow(
-                    document: document,
-                    isSelected: selectedDocument == document
-                )
-                .tag(document)
-                .onTapGesture {
-                    if selectedDocument != document {
-                        selectedDocument = document
+        VStack {
+            Text(listTitle)
+            
+            List(
+                documents,
+                children: \.children,
+                rowContent: { document in
+                    DocumentListRow(
+                        document: document,
+                        isSelected: (selectedDocument != nil) ? (documents[selectedDocument!] == document) : false
+                    )
+                    .tag(documents.firstIndex(of: document)!)
+                    .onTapGesture {
+                        let idx = documents.firstIndex(of: document)
+                        if idx != selectedDocument {
+                            selectedDocument = idx
+                            onOpen(document)
+                        }
                     }
+                    .contextMenu { document.contextMenu?() }
                 }
-            }
-        )
-        .listStyle(SidebarListStyle())
-        .onChange(of: selectedDocument) { document in
-            if let document = document { didOpen(document) }
+            )
+            .listStyle(SidebarListStyle())
         }
     }
 }
@@ -40,7 +45,7 @@ public struct DocumentList: View {
 struct DocumentList_Previews: PreviewProvider {
     static var previews: some View {
         DocumentList(
-            selectedDocument: .constant(nil),
+            listTitle: .constant("FILES"),
             documents: [
                 RecentDocument(name: "Document A", detail: "1d"),
                 RecentDocument(
@@ -53,7 +58,7 @@ struct DocumentList_Previews: PreviewProvider {
                 ),
                 RecentDocument(name: "Document C", detail: "6m")
             ],
-            didOpen: { _ in }
+            onOpen: { _ in }
         )
     }
 }

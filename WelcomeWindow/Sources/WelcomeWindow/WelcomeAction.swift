@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
-public struct WelcomeAction: Identifiable {
+public struct WelcomeAction: Identifiable, Equatable {
     public let id: UUID = UUID()
     public let title: String
     public let detail: String
@@ -16,7 +16,7 @@ public struct WelcomeAction: Identifiable {
     public let imageColor: Color
     public let isEnabled: Bool
     public let onSelect: () -> ()
-    
+   
     public init(
         title: String,
         detail: String,
@@ -31,5 +31,14 @@ public struct WelcomeAction: Identifiable {
         self.imageColor = imageColor
         self.isEnabled = isEnabled
         self.onSelect = onSelect
+    }
+    
+    public static func == (lhs: WelcomeAction, rhs: WelcomeAction) -> Bool {
+        lhs.id == rhs.id &&
+            lhs.title == rhs.title &&
+            lhs.detail == rhs.detail &&
+            lhs.systemImage == rhs.systemImage &&
+            lhs.imageColor == rhs.imageColor &&
+            lhs.isEnabled == rhs.isEnabled
     }
 }
