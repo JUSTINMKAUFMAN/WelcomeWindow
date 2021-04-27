@@ -35,8 +35,7 @@ public struct DocumentList: View {
                     )
                     .tag(documents.firstIndex(of: document)!)
                     .onTapGesture {
-                        let idx = documents.firstIndex(of: document)
-                        if idx != selectedDocument {
+                        if let idx = documents.firstIndex(of: document), idx != selectedDocument {
                             selectedDocument = idx
                             onOpen(document)
                         }

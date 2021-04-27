@@ -42,6 +42,9 @@ struct WelcomeWindowDemoApp: App {
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
+                        children: [
+                            RecentDocument(name: "MyChildA", detail: "/path/to/MyChildA")
+                        ],
                         contextMenu: {
                             AnyView(
                                 VStack {
