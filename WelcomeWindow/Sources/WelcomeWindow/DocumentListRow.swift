@@ -81,10 +81,10 @@ struct DocumentListRow: View {
             }
         }
         .padding(EdgeInsets(top: 2.0, leading: 16.0, bottom: 2.0, trailing: 6.0))
-        .opacity(isHovered ? 0.75 : 1.0)
+        .opacity(isHovered ? 0.775 : 1.0)
         .background(Color.white.opacity(0.000000000001))
-        .gesture(TapGesture(count: 2).onEnded { onSingleAction() })
-        .gesture(TapGesture(count: 1).onEnded { onDoubleAction() })
+        .gesture(TapGesture(count: 2).onEnded { onDoubleAction() })
+        .gesture(TapGesture(count: 1).onEnded { onSingleAction() })
     }
 }
 

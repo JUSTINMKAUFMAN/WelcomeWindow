@@ -15,9 +15,8 @@ public struct WelcomeWindow: View {
     private let titleText: String
     private let actions: [WelcomeAction]
     private let handleOpenDocument: (RecentDocument) -> ()
-    
-    @Binding private var documentListTitle: String
-    @Binding private var recentDocuments: [RecentDocument]
+    private let documentListTitle: String
+    private let recentDocuments: [RecentDocument]
     
     @State private var selectedDocument: Int? = nil
     @State private var hoverAction: WelcomeAction? = nil
@@ -26,15 +25,15 @@ public struct WelcomeWindow: View {
         logoImage: Image = Image(systemName: "qrcode.viewfinder"),
         titleText: String = "Welcome",
         actions: [WelcomeAction] = [],
-        documentListTitle: Binding<String> = .constant("Documents"),
-        recentDocuments: Binding<[RecentDocument]> = .constant([]),
+        documentListTitle: String = "Documents",
+        recentDocuments: [RecentDocument] = [],
         handleOpenDocument: (@escaping (RecentDocument) -> ())
     ) {
         self.logoImage = logoImage
         self.titleText = titleText
         self.actions = actions
-        self._documentListTitle = documentListTitle
-        self._recentDocuments = recentDocuments
+        self.documentListTitle = documentListTitle
+        self.recentDocuments = recentDocuments
         self.handleOpenDocument = handleOpenDocument
     }
     
@@ -87,8 +86,8 @@ public struct WelcomeWindow: View {
             .padding(40.0)
             
             DocumentList(
-                listTitle: $documentListTitle,
-                recentDocuments: $recentDocuments,
+                listTitle: documentListTitle,
+                documents: recentDocuments,
                 onOpen: { handleOpenDocument($0) }
             )
         }
@@ -147,7 +146,7 @@ struct WelcomeWindow_Previews: PreviewProvider {
                     onSelect: {}
                 )
             ],
-            recentDocuments: .constant([
+            recentDocuments: [
                 RecentDocument(
                     name: "MyDocA",
                     detail: "/path/to/MyDocA",
@@ -181,7 +180,7 @@ struct WelcomeWindow_Previews: PreviewProvider {
                     detail: "/path/to/MyDocB",
                     systemImage: "plus.square"
                 )
-            ]),
+            ],
             handleOpenDocument: { _ in }
         )
     }
