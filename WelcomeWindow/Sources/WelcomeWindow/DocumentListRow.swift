@@ -9,37 +9,60 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 struct DocumentListRow: View {
-    let document: RecentDocument
-    let isRoot: Bool
-    let isSelected: Bool
-    let isHovered: Bool
-    let onAction: (RecentDocument) -> ()
+    private let name: String
+    private let detail: String
+    private let imageSymbol: String
+    private let imageColor: Color
+    private let isRoot: Bool
+    private let isSelected: Bool
+    private let isHovered: Bool
+    private let onAction: () -> Void
 
+    init(
+        name: String,
+        detail: String,
+        imageSymbol: String = "circle.fill",
+        imageColor: Color = Color.blue,
+        isRoot: Bool = true,
+        isSelected: Bool = false,
+        isHovered: Bool = false,
+        onAction: @escaping (() -> Void) = {}
+    ) {
+        self.name = name
+        self.detail = detail
+        self.imageSymbol = imageSymbol
+        self.imageColor = imageColor
+        self.isRoot = isRoot
+        self.isSelected = isSelected
+        self.isHovered = isHovered
+        self.onAction = onAction
+    }
+    
     var body: some View {
         HStack(alignment: .center) {
             if isRoot {
-                Image(systemName: document.systemImage)
+                Image(systemName: imageSymbol)
                     .font(.largeTitle)
-                    .foregroundColor(document.imageColor)
+                    .foregroundColor(imageColor)
                 
                 Spacer().frame(width: 13.0)
             } else {
                 Image(systemName: "smallcircle.fill.circle.fill")
                     .font(.caption)
-                    .foregroundColor(document.imageColor)
+                    .foregroundColor(imageColor)
                 
                 Spacer().frame(width: 6.0)
             }
             
             VStack(alignment: .leading, spacing: 2.0) {
-                Text(document.name)
+                Text(name)
                     .font(isRoot ? .body : .caption2)
                     .fontWeight(isSelected ? .bold : .regular)
                     .truncationMode(.tail)
                     .frame(minWidth: 24.0)
                 
                 if isRoot {
-                    Text(document.detail)
+                    Text(detail)
                         .font(.system(size: 10.0))
                         .fontWeight(isSelected ? .semibold : .regular)
                         .truncationMode(.middle)
@@ -50,9 +73,9 @@ struct DocumentListRow: View {
             
             if isRoot {
                 Button(
-                    action: { onAction(document) },
+                    action: onAction,
                     label: {
-                        Image(systemName: "chevron.forward.circle")
+                        Image(systemName: "chevron.forward")
                             .font(.title)
                             .foregroundColor(Color.blue)
                     }
@@ -69,27 +92,8 @@ struct DocumentListRow: View {
 struct DocumentListRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DocumentListRow(
-                document: RecentDocument(
-                    name: "Document A",
-                    detail: "1h"
-                ),
-                isRoot: true,
-                isSelected: true,
-                isHovered: false,
-                onAction: { _ in }
-            )
-            
-            DocumentListRow(
-                document: RecentDocument(
-                    name: "Document B",
-                    detail: "2d"
-                ),
-                isRoot: false,
-                isSelected: false,
-                isHovered: false,
-                onAction: { _ in }
-            )
+            DocumentListRow(name: "Document A", detail: "1h", isRoot: true, isSelected: true)
+            DocumentListRow(name: "Document B", detail: "2d", isRoot: false)
         }
     }
 }

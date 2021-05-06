@@ -10,40 +10,57 @@ import SwiftUI
 @available(iOS 14.0, macOS 11.0, *)
 public struct DocumentList: View {
     @Binding public var listTitle: String
-    public let documents: [RecentDocument]
+    @Binding public var recentDocuments: [RecentDocument] { willSet { DispatchQueue.main.async { documents = newValue } } }
     let onOpen: (RecentDocument) -> ()
     
-    @State private var selectedDocument: UUID? = nil
-    @State private var hoveredDocument: UUID? = nil
+    @State private var documents: [RecentDocument] = []
+    @State private var hoveredDocument: RecentDocument? = nil
+    @State private var selectedDocument: RecentDocument? = nil
     
     public var body: some View {
         List(
             documents,
+            id: \.id,
             children: \.children,
+            selection: $selectedDocument,
             rowContent: { document in
-                let isRoot = documents.contains(document)
-                
                 VStack {
-                    if documents[0] == document {
+                    if documents.firstIndex(of: document) == 0 {
                         HStack {
                             Section(header: Text(listTitle)) {}
                             Spacer()
                         }
                     }
                     
+                    let isRoot = documents.contains(document)
+                    
                     DocumentListRow(
-                        document: document,
+                        name: document.name,
+                        detail: document.detail,
+                        imageSymbol: document.systemImage,
+                        imageColor: document.imageColor,
                         isRoot: isRoot,
-                        isSelected: isRoot ? (selectedDocument == document.id) : false,
-                        isHovered: hoveredDocument == document.id,
-                        onAction: { if isRoot { selectedDocument = $0.id; onOpen($0) } }
+                        isSelected: isRoot ? (selectedDocument?.id == document.id) : false,
+                        isHovered: hoveredDocument?.id == document.id,
+                        onAction: { handleDocumentAction(document, isRoot: isRoot) }
                     )
-                    .onHover { _ in hoveredDocument = document.id }
+                    .onHover { _ in hoveredDocument = document }
                     .contextMenu { document.contextMenu?() }
                 }
             }
         )
         .listStyle(SidebarListStyle())
+        .onAppear { setup() }
+    }
+    
+    private func setup() {
+        documents = recentDocuments
+    }
+    
+    private func handleDocumentAction(_ document: RecentDocument, isRoot: Bool = true) {
+        guard isRoot else { return }
+        selectedDocument = document
+        onOpen(document)
     }
 }
 
@@ -51,7 +68,7 @@ struct DocumentList_Previews: PreviewProvider {
     static var previews: some View {
         DocumentList(
             listTitle: .constant("FILES"),
-            documents: [
+            recentDocuments: .constant([
                 RecentDocument(name: "Document A", detail: "1d"),
                 RecentDocument(
                     name: "Document B",
@@ -62,7 +79,7 @@ struct DocumentList_Previews: PreviewProvider {
                     ]
                 ),
                 RecentDocument(name: "Document C", detail: "6m")
-            ],
+            ]),
             onOpen: { _ in }
         )
     }

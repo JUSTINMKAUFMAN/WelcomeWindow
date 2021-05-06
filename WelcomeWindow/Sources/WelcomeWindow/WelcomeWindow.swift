@@ -11,30 +11,31 @@ import SwiftUI
 public struct WelcomeWindow: View {
     @Environment(\.colorScheme) var colorScheme
     
+    private let logoImage: Image
+    private let titleText: String
+    private let actions: [WelcomeAction]
+    private let handleOpenDocument: (RecentDocument) -> ()
+    
+    @Binding private var documentListTitle: String
+    @Binding private var recentDocuments: [RecentDocument]
+    
     @State private var selectedDocument: Int? = nil
     @State private var hoverAction: WelcomeAction? = nil
-    
-    public let logoImage: Image
-    public let titleText: String
-    public let actions: [WelcomeAction]
-    public let recentDocuments: [RecentDocument]
-    public let handleOpenDocument: (RecentDocument) -> ()
-    @Binding private var documentListTitle: String
     
     public init(
         logoImage: Image = Image(systemName: "qrcode.viewfinder"),
         titleText: String = "Welcome",
         actions: [WelcomeAction] = [],
-        recentDocuments: [RecentDocument] = [],
-        handleOpenDocument: (@escaping (RecentDocument) -> ()),
-        documentListTitle: Binding<String> = .constant("Documents")
+        documentListTitle: Binding<String> = .constant("Documents"),
+        recentDocuments: Binding<[RecentDocument]> = .constant([]),
+        handleOpenDocument: (@escaping (RecentDocument) -> ())
     ) {
         self.logoImage = logoImage
         self.titleText = titleText
         self.actions = actions
-        self.recentDocuments = recentDocuments
-        self.handleOpenDocument = handleOpenDocument
         self._documentListTitle = documentListTitle
+        self._recentDocuments = recentDocuments
+        self.handleOpenDocument = handleOpenDocument
     }
     
     public var body: some View {
@@ -87,7 +88,7 @@ public struct WelcomeWindow: View {
             
             DocumentList(
                 listTitle: $documentListTitle,
-                documents: recentDocuments,
+                recentDocuments: $recentDocuments,
                 onOpen: { handleOpenDocument($0) }
             )
         }
@@ -146,7 +147,7 @@ struct WelcomeWindow_Previews: PreviewProvider {
                     onSelect: {}
                 )
             ],
-            recentDocuments: [
+            recentDocuments: .constant([
                 RecentDocument(
                     name: "MyDocA",
                     detail: "/path/to/MyDocA",
@@ -180,7 +181,7 @@ struct WelcomeWindow_Previews: PreviewProvider {
                     detail: "/path/to/MyDocB",
                     systemImage: "plus.square"
                 )
-            ],
+            ]),
             handleOpenDocument: { _ in }
         )
     }
