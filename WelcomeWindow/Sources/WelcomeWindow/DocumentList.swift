@@ -35,11 +35,10 @@ public struct DocumentList: View {
                 rowContent: { document in
                     if document.id == DocumentList.titleIdentifier {
                         HStack {
-                            Section(header: Text(listTitle)) {}
+                            Section(header: Text(listTitle).foregroundColor(Color.secondary)) {}
                             Spacer()
                         }
-                        .background(Color.white.opacity(0.000000000001))
-                        .onTapGesture { onSelect(nil) }
+                        .disabled(true)
                     } else {
                         DocumentListRow(
                             name: document.name,
@@ -49,11 +48,9 @@ public struct DocumentList: View {
                             isRoot: documents.contains(document),
                             isSelected: selectedDocument == document,
                             isHovered: hoveredDocument == document,
-                            onAction: { onSelect(document) }
+                            onSingleAction: { onSelect(document) },
+                            onDoubleAction: { onOpen(document) }
                         )
-                        .background(Color.white.opacity(0.0000000000001))
-                        .onTapGesture { onSelect(document) }
-                        .gesture(TapGesture(count: 2).onEnded { onOpen(document) })
                         .onHover { hoveredDocument = $0 ? document : nil }
                         .contextMenu { document.contextMenu?() }
                     }
@@ -61,17 +58,23 @@ public struct DocumentList: View {
             )
             .listStyle(SidebarListStyle())
         }
+        .background(Color.white.opacity(0.0000000000001))
+        .onTapGesture { onSelect(nil) }
         .onAppear { onUpdate() }
     }
 
+    private func onDoubleAction(_ document: RecentDocument) {
+        onOpen(document)
+    }
+    
     private func onSelect(_ document: RecentDocument?) {
         selectedDocument = document
     }
     
-    private func onOpen(_ document: RecentDocument, isRoot: Bool = true) {
-        guard documents.contains(document) else { return onSelect(document) }
-        onSelect(nil)
+    private func onOpen(_ document: RecentDocument) {
+        guard documents.contains(document) else { onSelect(document); return }
         onOpen(document)
+        DispatchQueue.main.async { onSelect(nil) }
     }
 
     private func onUpdate() {

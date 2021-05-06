@@ -16,7 +16,8 @@ struct DocumentListRow: View {
     private let isRoot: Bool
     private let isSelected: Bool
     private let isHovered: Bool
-    private let onAction: () -> Void
+    private let onSingleAction: () -> Void
+    private let onDoubleAction: () -> Void
 
     init(
         name: String,
@@ -26,7 +27,8 @@ struct DocumentListRow: View {
         isRoot: Bool = true,
         isSelected: Bool = false,
         isHovered: Bool = false,
-        onAction: @escaping (() -> Void) = {}
+        onSingleAction: @escaping (() -> Void) = {},
+        onDoubleAction: @escaping (() -> Void) = {}
     ) {
         self.name = name
         self.detail = detail
@@ -35,7 +37,8 @@ struct DocumentListRow: View {
         self.isRoot = isRoot
         self.isSelected = isSelected
         self.isHovered = isHovered
-        self.onAction = onAction
+        self.onSingleAction = onSingleAction
+        self.onDoubleAction = onDoubleAction
     }
     
     var body: some View {
@@ -72,20 +75,16 @@ struct DocumentListRow: View {
             Spacer()
             
             if isRoot {
-                Button(
-                    action: onAction,
-                    label: {
-                        Image(systemName: "chevron.forward")
-                            .font(.title3)
-                            .foregroundColor(Color.blue)
-                    }
-                )
-                .buttonStyle(BorderlessButtonStyle())
+                Image(systemName: "chevron.forward")
+                    .font(.title3)
+                    .foregroundColor(Color.blue)
             }
         }
         .padding(EdgeInsets(top: 2.0, leading: 16.0, bottom: 2.0, trailing: 6.0))
-        .opacity(isHovered ? 0.7 : 1.0)
-        
+        .opacity(isHovered ? 0.75 : 1.0)
+        .background(Color.white.opacity(0.000000000001))
+        .gesture(TapGesture(count: 2).onEnded { onSingleAction() })
+        .gesture(TapGesture(count: 1).onEnded { onDoubleAction() })
     }
 }
 
