@@ -21,7 +21,7 @@ struct DocumentListRow: View {
     init(
         name: String,
         detail: String,
-        imageSymbol: String = "circle.fill",
+        imageSymbol: String = "doc.fill",
         imageColor: Color = Color.blue,
         isRoot: Bool = true,
         isSelected: Bool = false,
@@ -76,7 +76,7 @@ struct DocumentListRow: View {
                     action: onAction,
                     label: {
                         Image(systemName: "chevron.forward")
-                            .font(.title)
+                            .font(.title3)
                             .foregroundColor(Color.blue)
                     }
                 )

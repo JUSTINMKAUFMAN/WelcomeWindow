@@ -38,7 +38,7 @@ struct WelcomeWindowDemoApp: App {
                         onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: [
+                recentDocuments: .constant([
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
@@ -97,7 +97,7 @@ struct WelcomeWindowDemoApp: App {
                             )
                         }
                     )
-                ],
+                ]),
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }

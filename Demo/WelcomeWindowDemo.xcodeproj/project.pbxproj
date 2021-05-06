@@ -483,7 +483,7 @@
 			repositoryURL = "https://github.com/JUSTINMKAUFMAN/WelcomeWindow.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.6;
+				minimumVersion = 1.2.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

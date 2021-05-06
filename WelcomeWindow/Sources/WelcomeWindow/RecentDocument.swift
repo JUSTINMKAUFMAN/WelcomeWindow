@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, *)
 public struct RecentDocument: Identifiable, Hashable {
-    public let id: UUID = UUID()
+    public let id: String
     public let name: String
     public let detail: String
     public let children: [RecentDocument]?
@@ -18,13 +18,15 @@ public struct RecentDocument: Identifiable, Hashable {
     public let contextMenu: (() -> AnyView)?
     
     public init(
+        id: String = UUID().uuidString,
         name: String,
-        detail: String,
+        detail: String = "",
         children: [RecentDocument]? = nil,
         systemImage: String = "doc.fill",
         imageColor: Color = Color.accentColor,
         contextMenu: (() -> AnyView)? = nil
     ) {
+        self.id = id
         self.name = name
         self.detail = detail
         self.children = children
