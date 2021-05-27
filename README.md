@@ -1,13 +1,14 @@
 # WelcomeWindow
 
-[![Version](https://img.shields.io/badge/spm-v1.4.0-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
+[![Version](https://img.shields.io/badge/spm-v1.4.1-blue)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow/blob/master/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS-orange)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
+[![Platform](https://img.shields.io/badge/platform-iOS-green)](https://github.com/JUSTINMKAUFMAN/WelcomeWindow)
 
-A welcome screen for a SwiftUI application modeled after the Welcome to Xcode window.
+A welcome screen for a SwiftUI application modeled after the 'Welcome to Xcode' window.
 
 <p align="center">
-    <img src="/WelcomeWindowDemoMac.png" />
+    <img src="/WelcomeWindowDemoMac.gif" />
     <br>
     <img src="/WelcomeWindowDemoiOS.png" />
 </p>
@@ -37,11 +38,25 @@ import SwiftUI
 import WelcomeWindow
 
 @main
-struct MyApp: App {
+struct WelcomeWindowDemoApp: App {
+    // Optionally track the hover state of the logo (macOS only)
+    @State var isHoveringLogo: Bool = false
+    
+    private var logoView: AnyView {
+        AnyView(
+            Image(systemName: "qrcode.viewfinder")
+                .resizable()
+                .scaleEffect(isHoveringLogo ? 0.8 : 1.0)
+                .rotationEffect(Angle(degrees: isHoveringLogo ? 180.0 : 0.0))
+                .animation(.easeInOut, value: isHoveringLogo)
+                .onHover { isHoveringLogo = $0 }
+        )
+    }
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
             WelcomeWindow(
-                logoImage: Image(systemName: "qrcode.viewfinder"),
+                logoView: logoView,
                 titleText: "Welcome to App",
                 actions: [
                     WelcomeAction(
@@ -66,7 +81,8 @@ struct MyApp: App {
                         onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: .constant([
+                documentListTitle: "Recently Opened",
+                recentDocuments: [
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
@@ -122,8 +138,9 @@ struct MyApp: App {
                             )
                         }
                     )
-                ]),
-                handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
+                ],
+                handleOpenDocument: { doc in print("Document opened: \(doc.name)") },
+                isHoveringLogo: $isHoveringLogo
             )
         }
     }

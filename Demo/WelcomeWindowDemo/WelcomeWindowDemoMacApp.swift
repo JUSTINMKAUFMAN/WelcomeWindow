@@ -10,10 +10,23 @@ import WelcomeWindow
 
 @main
 struct WelcomeWindowDemoApp: App {
+    @State var isHoveringLogo: Bool = false
+    
+    private var logoView: AnyView {
+        AnyView(
+            Image(systemName: "qrcode.viewfinder")
+                .resizable()
+                .scaleEffect(isHoveringLogo ? 0.8 : 1.0)
+                .rotationEffect(Angle(degrees: isHoveringLogo ? 180.0 : 0.0))
+                .animation(.easeInOut, value: isHoveringLogo)
+                .onHover { isHoveringLogo = $0 }
+        )
+    }
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
             WelcomeWindow(
-                logoView: AnyView(Image(systemName: "qrcode.viewfinder").resizable()),
+                logoView: logoView,
                 titleText: "Welcome to App",
                 actions: [
                     WelcomeAction(
@@ -99,7 +112,8 @@ struct WelcomeWindowDemoApp: App {
                         }
                     )
                 ],
-                handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
+                handleOpenDocument: { doc in print("Document opened: \(doc.name)") },
+                isHoveringLogo: $isHoveringLogo
             )
         }
     }
