@@ -13,7 +13,7 @@ struct WelcomeWindowDemoApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             WelcomeWindow(
-                logoImage: Image(systemName: "qrcode.viewfinder"),
+                logoView: AnyView(Image(systemName: "qrcode.viewfinder").resizable()),
                 titleText: "Welcome to App",
                 actions: [
                     WelcomeAction(
@@ -38,7 +38,8 @@ struct WelcomeWindowDemoApp: App {
                         onSelect: { print("Action triggered") }
                     )
                 ],
-                recentDocuments: .constant([
+                documentListTitle: "Recently Opened",
+                recentDocuments: [
                     RecentDocument(
                         name: "MyDocA",
                         detail: "/path/to/MyDocA",
@@ -97,7 +98,7 @@ struct WelcomeWindowDemoApp: App {
                             )
                         }
                     )
-                ]),
+                ],
                 handleOpenDocument: { doc in print("Document opened: \(doc.name)") }
             )
         }

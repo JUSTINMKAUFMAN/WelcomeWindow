@@ -11,38 +11,41 @@ import SwiftUI
 public struct WelcomeWindow: View {
     @Environment(\.colorScheme) var colorScheme
     
-    private let logoImage: Image
+    private let logoView: AnyView
     private let titleText: String
     private let actions: [WelcomeAction]
     private let handleOpenDocument: (RecentDocument) -> ()
     private let documentListTitle: String
     private let recentDocuments: [RecentDocument]
     
+    @Binding private var isHoveringLogo: Bool
     @State private var selectedDocument: Int? = nil
     @State private var hoverAction: WelcomeAction? = nil
     
     public init(
-        logoImage: Image = Image(systemName: "qrcode.viewfinder"),
+        logoView: AnyView = AnyView(Image(systemName: "qrcode.viewfinder").resizable()),
         titleText: String = "Welcome",
         actions: [WelcomeAction] = [],
         documentListTitle: String = "Documents",
         recentDocuments: [RecentDocument] = [],
-        handleOpenDocument: (@escaping (RecentDocument) -> ())
+        handleOpenDocument: (@escaping (RecentDocument) -> ()),
+        isHoveringLogo: Binding<Bool> = .constant(false)
     ) {
-        self.logoImage = logoImage
+        self.logoView = logoView
         self.titleText = titleText
         self.actions = actions
         self.documentListTitle = documentListTitle
         self.recentDocuments = recentDocuments
         self.handleOpenDocument = handleOpenDocument
+        self._isHoveringLogo = isHoveringLogo
     }
     
     public var body: some View {
         HStack(alignment: .top, spacing: 0.0) {
             VStack(alignment: .center, spacing: 0.0) {
-                logoImage
-                    .resizable()
-                    .frame(width: 100.0, height: 100.0)
+                logoView
+                    .frame(width: 140.0, height: 140.0)
+                    .onHover { isHoveringLogo = $0 }
                 
                 Spacer().frame(height: 3.0)
                 
@@ -56,7 +59,8 @@ public struct WelcomeWindow: View {
                     .fontWeight(.light)
                     .foregroundColor(.gray)
                 
-                Spacer().frame(minHeight: 6.0)
+                Spacer()
+                    .frame(minHeight: max(24.0, min(6.0, (CGFloat(actions.count) - 2.0) * 6.0)))
                 
                 VStack(alignment: .leading, spacing: 16.0) {
                     ForEach(actions) { action in
@@ -85,11 +89,15 @@ public struct WelcomeWindow: View {
             .frame(width: 414.0)
             .padding(40.0)
             
-            DocumentList(
-                listTitle: documentListTitle,
-                documents: recentDocuments,
-                onOpen: { handleOpenDocument($0) }
-            )
+            VStack {
+                Spacer().frame(height: 9.0)
+            
+                DocumentList(
+                    listTitle: documentListTitle,
+                    documents: recentDocuments,
+                    onOpen: { handleOpenDocument($0) }
+                )
+            }
         }
         .padding(.top, -19.0)
         .frame(height: 450.0)
